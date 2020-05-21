@@ -13,7 +13,7 @@ object SocketWindowWordCount {
       try {
         ParameterTool.fromArgs(args).getInt("port")
       } catch {
-        case e: Exception => {
+        case _: Exception => {
           System.err.println("No port specified. Please run 'SocketWindowWordCount --port <port>'")
           return
         }
@@ -36,7 +36,8 @@ object SocketWindowWordCount {
     // print the results with a single thread, rather than in parallel
     windowCounts.print().setParallelism(1)
 
-    env.execute("Socket Window WordCount")
+    val res = env.execute("Socket Window WordCount")
+    println(res)
   }
 
   // Data type for words with count
